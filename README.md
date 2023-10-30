@@ -2,10 +2,10 @@
 Juego Wordix desarollado en Introduccion a la programación (FAI) 
 
 ## Materia 2023
-Introduccion a la Programación
-Tecnicatura en Desarrollo Web
-Facultad de informática
-Universidad Nacional del Comahue
+Introduccion a la Programación/
+Tecnicatura en Desarrollo Web/
+Facultad de informática/
+Universidad Nacional del Comahue/
 Profesores: 
  -  María José Rotter
  -  Claudia Carrasco
