@@ -99,8 +99,6 @@ do {
             escribirMensajeBienvenida($nombreJugador);
             echo "Ingrese numero de palabra para jugar: ";
             $numeroPalabra = (int)trim(fgets(STDIN));
-            
-
             break;
         case 2: 
             echo "implementacion a hacer: 2";
