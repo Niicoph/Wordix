@@ -94,14 +94,37 @@ do {
  if ( $opcion >= 1 && $opcion <= 8) {
     switch ($opcion) {
         case 1: 
+            $jugarOtraPartida = true;
+            $numeroGuardado = [];
             echo "Ingrese nombre del jugador: \n";
             $nombreJugador = (string)trim(fgets(STDIN));
             escribirMensajeBienvenida($nombreJugador);
+            while($jugarOtraPartida == true) {
             echo "Ingrese numero de palabra para jugar: ";
-            $numeroPalabra = (int)trim(fgets(STDIN));
+            $numero = solicitarNumeroEntre(1,5);
+            if (in_array($numero , $numeroGuardado)) {
+                echo "No puede jugar esta palabra. Intente con otra \n";
+            } else {
+                array_push($numeroGuardado, $numero);
+                var_dump($numeroGuardado);
+
+                // logica de partida
+
+
+                echo "Desea jugar otra vez? s/n \n";
+                $respuesta = trim(fgets(STDIN));
+                if ( $respuesta == "s") {
+                    $jugarOtraPartida = true;
+                } else {
+                    $jugarOtraPartida = false;
+                }
+            }
+        }
             break;
         case 2: 
-            echo "implementacion a hacer: 2";
+            echo "Ingrese nombre del jugador: \n";
+            $nombreJugador = (string)trim(fgets(STDIN));
+            escribirMensajeBienvenida($nombreJugador);
             break;
         case 3: 
             echo "implementacion a hacer: 3";

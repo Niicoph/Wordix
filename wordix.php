@@ -29,7 +29,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**
  *  ****COMPLETAR*****
  */
-function solicitarNumeroEntre($min, $max)
+function solicitarNumeroEntre($min, $max)   // permite solicitar un numero entre dados por parametros. Si no cumplen las restricciones, vuelve a preguntar.
 {
     //int $numero
 
@@ -98,7 +98,7 @@ function escribirNormal($texto)
  * @param string $texto
  * @param string $estado
  */
-function escribirSegunEstado($texto, $estado)
+function escribirSegunEstado($texto, $estado)  
 {
     switch ($estado) {
         case ESTADO_LETRA_DISPONIBLE:
