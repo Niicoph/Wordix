@@ -263,23 +263,23 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
  * @param string $palabraIntento
  * @return array estructura wordix modificada
  */
-function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
+function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)  // QUISO
 {
-    $cantCaracteres = strlen($palabraIntento);
+    $cantCaracteres = strlen($palabraIntento);  // 5
     $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
-    for ($i = 0; $i < $cantCaracteres; $i++) {
-        $letraIntento = $palabraIntento[$i];
-        $posicion = strpos($palabraWordix, $letraIntento);
+    for ($i = 0; $i < $cantCaracteres; $i++) {                                                                
+        $letraIntento = $palabraIntento[$i];  //  Q                                                          // U
+        $posicion = strpos($palabraWordix, $letraIntento); // si en QUISO esta Q == true                     // si en QUISO esta U == true
         if ($posicion === false) {
-            $estado = ESTADO_LETRA_DESCARTADA;
+            $estado = ESTADO_LETRA_DESCARTADA;   // ROJO
         } else {
-            if ($letraIntento == $palabraWordix[$i]) {
+            if ($letraIntento == $palabraWordix[$i]) {   // Q == Q VERDE                                      // U == U -> VERDE
                 $estado = ESTADO_LETRA_ENCONTRADA;
             } else {
-                $estado = ESTADO_LETRA_PERTENECE;
+                $estado = ESTADO_LETRA_PERTENECE;      //   Esta pero no en la posicion == amarillo
             }
         }
-        array_push($estructuraPalabraIntento, ["letra" => $letraIntento, "estado" => $estado]);
+        array_push($estructuraPalabraIntento, ["letra" => $letraIntento, "estado" => $estado]); // letra: Q , estado : Encontrada  
     }
 
     array_push($estruturaIntentosWordix, $estructuraPalabraIntento);
