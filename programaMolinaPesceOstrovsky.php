@@ -8,7 +8,7 @@ include_once("wordix.php");
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
 /* ****COMPLETAR***** */
 // Pesce Matias Nicolas. FAI-4594. TUDW. matias.pesce@est.fi.uncoma.edu.ar. Niicoph.
-//
+// Molina Joaquin Gabriel. FAI-4572. TUDW. joaquin.molina@est.fi.uncoma.edu.ar. JoaMolina7
 //
 
 /**************************************/
