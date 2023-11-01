@@ -13,4 +13,5 @@ Profesores:
  -  Albany Petit Salazar
 
 ## Integrantes del grupo
- - Pesce Matias Nicolás [FAI-4594]
+ - Pesce Matias Nicolás [FAI-4594] - email: matias.pesce@est.fi.uncoma.edu.ar - Github: Niicoph
+ - Molina Joaquin [FAI-4572] - email:joaquin.molina@est.fi.uncoma.edu.ar - GitHub: JoaMolina7

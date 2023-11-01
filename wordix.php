@@ -27,7 +27,11 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  
+ * Se encarga de garantizar que el valor ingresado por el usuario cumpla con las condiciones de: ser un número entero y estar dentro del rango especificado
+ *@param int $min
+ *@param int $max
+ *@return int $numero
  */
 function solicitarNumeroEntre($min, $max)   // permite solicitar un numero entre dados por parametros. Si no cumplen las restricciones, vuelve a preguntar.
 {
@@ -120,7 +124,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Escribir mensaje de bienvenida al usuario 
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -133,7 +138,11 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Mediante el ingreso de un string ($cadena) como parámetro, se analiza si es una palabra (que no contenga números ni carácteres no alfabéticos)
+ * La función ctype_alpha verifica si todos los caracteres en la string entregada son alfabéticos, retornando un valor booleano
+ * La función strlen devuelve la longitud (cantidad de carácteres) de la cadena, retornando un valor entero 
+ * @param string $cadena
+ * @return boolean $esLetra
  */
 function esPalabra($cadena)
 {
@@ -149,7 +158,10 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ *  Se pide el ingreso de palabra de 5 letras, garantizando que el retorno sea una palabra con dicha condición
+ * La función strtoupper convierte el string en mayúsculas (en su totalidad de carácteres)
+ * Es utilizada la función esPalabra
+ * @return string $palabra
  */
 function leerPalabra5Letras()
 {
