@@ -14,4 +14,4 @@ Profesores:
 
 ## Integrantes del grupo
  - Pesce Matias Nicolás [FAI-4594]
- - Molina Joaquin [FAI-4572]
+ - Molina Joaquin [FAI-4572] - mail:joaquin.molina@est.fi.uncoma.edu.ar - GitHub: JoaMolina7
