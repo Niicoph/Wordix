@@ -43,6 +43,7 @@ function cargarColeccionPalabras() {
 
 //Inicialización de variables:
 $coleccionPalabras = cargarColeccionPalabras();
+$coleccionPartidas = []; 
 function solicitarOpcionMenu() {
     echo "Menu de opciones: \n";
     echo "1) Jugar al wordix con una palabra elegida  \n";
@@ -78,7 +79,6 @@ do {
                    echo "No puede jugar esta palabra. Intente con otra \n";
                   }else {
                   $partida = jugarWordix($coleccionPalabras[$numeroPalabra] , $nombreJugador); // devuelve array partida y lo almacena en una variable
-                  $coleccionPartidas = []; 
                   array_push($coleccionPartidas,$partida);   
                   array_push($numeroGuardado, $numeroPalabra);   
                   } 
@@ -95,11 +95,19 @@ do {
                echo "implementacion a hacer: 3";
                break;   
            case 3: 
-               echo "numero de partida que desea ver: ";   // faltaria que evalue si no se ha jugado ninguna partida, es decir, esta vacio.
-               $numIngresado = (int)trim(fgets(STDIN));
-               $datosPartida = $coleccionPartidas[$numIngresado];
-               echo "Jugador: " . $datosPartida["jugador"] . "\n";
-               
+            echo "Número de partida que desea ver: ";
+            $numIngresado = (int)trim(fgets(STDIN));
+            if ($numIngresado >= 0 && $numIngresado < count($coleccionPartidas)) {
+                $datosPartida = $coleccionPartidas[$numIngresado];
+                echo "*********************\n";
+                echo "Partida Wordix $numIngresado: " . "palabra " . $datosPartida["palabraWordix"] . "\n";
+                echo "Jugador: " . $datosPartida["jugador"] . "\n";
+                echo "Puntaje: " . $datosPartida["puntaje"] . "\n";
+                echo "Intentos: " . $datosPartida["intentos"] . "\n";
+                echo "*********************\n";
+            } else {
+                echo "Error: Número de partida inválido.\n";
+            }
         
                break;   
            case 4: 
