@@ -343,6 +343,16 @@ function esIntentoGanado($estructuraPalabraIntento)
  * ****COMPLETAR***** documentación de la intefaz
  */
 function obtenerPuntajeWordix($nroIntento) {
+    // Arreglo 
+    $puntajesLetras = [
+        'A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1,
+        'B' => 2, 'C' => 2, 'D' => 2, 'F' => 2, 'G' => 2, 'H' => 2, 'J' => 2, 'K' => 2, 'L' => 2, 'M' => 2,
+        'N' => 3, 'Ñ' => 3, 'P' => 3, 'Q' => 3, 'R' => 3, 'S' => 3, 'T' => 3, 'V' => 3, 'W' => 3, 'X' => 3, 'Y' => 3, 'Z' => 3,
+    ];
+
+
+
+    
     switch($nroIntento) {
         case 1: 
             return $puntaje = 6; 
