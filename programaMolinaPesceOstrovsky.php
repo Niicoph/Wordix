@@ -79,6 +79,53 @@ function seleccionarOpcion() {
     return $opcionUsuario;
 }
 
+//4-Función leerPalabra5Letras
+/**
+ *  Se pide el ingreso de palabra de 5 letras, garantizando que el retorno sea una palabra con dicha condición
+ * La función strtoupper convierte el string en mayúsculas (en su totalidad de carácteres)
+ * Es utilizada la función esPalabra
+ * @return string 
+ */
+function leerPalabra5Letras()
+{
+    //string $palabra
+    echo "Ingrese una palabra de 5 letras: ";
+    $palabra = trim(fgets(STDIN));
+    $palabra  = strtoupper($palabra);
+
+    while ((strlen($palabra) != 5) || !esPalabra($palabra)) {
+        echo "Debe ingresar una palabra de 5 letras:";
+        $palabra = strtoupper(trim(fgets(STDIN)));
+    }
+    return $palabra;
+}
+
+//5-Funcion solicitarNumeroEntre 
+/** 
+ * Se encarga de garantizar que el valor ingresado por el usuario cumpla con las condiciones de: ser un número entero y estar dentro del rango especificado
+ *@param int $min
+ *@param int $max
+ *@return int 
+ */
+function solicitarNumeroEntre($min, $max)   // permite solicitar un numero entre dados por parametros. Si no cumplen las restricciones, vuelve a preguntar.
+{
+    //int $numero
+
+    $numero = trim(fgets(STDIN));
+
+    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
+        $numero  = $numero * 1; //con esta operación convierto el string en número.
+    }
+    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
+        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+        $numero = trim(fgets(STDIN));
+        if (is_numeric($numero)) {
+            $numero  = $numero * 1;
+        }
+    }
+    return $numero;
+}
+
 //6-Funcion mostrarPartida 
 /**
  * toma como parametro una partida para mostrar. Si se encuentra la muestra. Sino solicita otra partida
@@ -102,6 +149,27 @@ function mostrarPartida($numPartida , $partidas) {
         $respuesta = "Error: Número de partida inválido.\n";
     }
     return $respuesta;
+}
+
+//7-Funcion agregarPalabra
+/**
+ * Recibe como parámetros la colección de palabras y la nueva palabra. La nueva palabra se agrega, solo si esta ya no pertenece a la colección.
+ * Caso contrario, se escribe un mensaje con el aviso.
+ * @param array $coleccionPalabras
+ * @param string $nuevaPalabra
+ * @return array 
+ *  */ 
+function agregarPalabra($coleccionPalabras, $nuevaPalabra)
+{
+    if (in_array($nuevaPalabra, $coleccionPalabras)) {
+        echo "La palabra ya existe en la colección. Intente con otra.\n";
+    } else {
+        // Agrega la nueva palabra al final de la colección
+        $coleccionPalabras[] = $nuevaPalabra;
+        echo "¡Éxito! La palabra $nuevaPalabra ha sido agregada.\n";
+    }
+
+    return $coleccionPalabras; // Retorna la colección actualizada
 }
 
 
@@ -217,13 +285,8 @@ do {
                echo "implementacion a hacer: 6";
                break;
            case 7: 
-               $nuevaPalabra = leerPalabra5Letras();
-               if (in_array($nuevaPalabra , $coleccionPalabras)) {
-                 echo "Intente otra vez. Palabra disponible \n";
-               } else {
-                array_push($coleccionPalabras , $nuevaPalabra);
-                 echo "Exito! la palabra $nuevaPalabra ha sido agregada \n";
-               }
+                $nuevaPalabra = leerPalabra5Letras();
+                $coleccionPalabras = agregarPalabra($coleccionPalabras, $nuevaPalabra);
                break;
            case 8:
                $mostrarMenu = false;
