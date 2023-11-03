@@ -16,21 +16,94 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+// 1-Funcion cargarColeccionPalabras
+
 /**
  * Obtiene una colección de palabras
  * @return array
  */
-function cargarColeccionPalabras() {
+function cargarColeccionPalabras()
+{
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
         "CRUDO", "RANGO", "FARDO", "BRAZO", "MUNDO"
-         
     ];
 
     return ($coleccionPalabras);
 }
+
+//2-Funcion cargarPartidas 
+
+/**
+ * Obtiene una coleccion de partidas
+ * @return array
+ */
+function cargarPartidas() {
+    // comenzamos las partidas individuales
+    $partida1 = [ "palabraWordix" => "QUESO" , "jugador" => "JUAN" , "intentos" => 1, "puntaje" => 15 ];
+    $partida2 = [ "palabraWordix" => "MUJER" , "jugador" => "PABLO" , "intentos" => 3, "puntaje" => 13 ];
+    $partida3 = [ "palabraWordix" => "CASAS" , "jugador" => "CAMILA" , "intentos" => 4, "puntaje" => 13 ];
+    $partida4 = [ "palabraWordix" => "RASGO" , "jugador" => "JOSE" , "intentos" => 1, "puntaje" => 16 ];
+    $partida5 = [ "palabraWordix" => "BRAZO" , "jugador" => "JULIO" , "intentos" => 2, "puntaje" => 15 ];
+    $partida6 = [ "palabraWordix" => "FARDO" , "jugador" => "CAMILA" , "intentos" => 5, "puntaje" => 11 ];
+    $partida7 = [ "palabraWordix" => "CRUDO" , "jugador" => "MARTINA" , "intentos" => 6, "puntaje" => 0  ];
+    $partida8 = [ "palabraWordix" => "RANGO" , "jugador" => "PAULA" , "intentos" => 1, "puntaje" => 15 ];
+    $partida9 = [ "palabraWordix" => "MUNDO" , "jugador" => "PABLO" , "intentos" => 6, "puntaje" => 0 ];
+    $partida10 = [ "palabraWordix" => "VERDE" , "jugador" => "JUAN" , "intentos" => 6, "puntaje" => 0 ];
+    // array que va a contener a las partidas
+    $partidas = [];
+    // pusheamos las partidas al array principal, permitiendo tener los indices.
+    array_push($partidas, $partida1, $partida2, $partida3, $partida4, $partida5, $partida6, $partida7, $partida8, $partida9 , $partida10);
+    // retornamos las partidas
+    return $partidas;
+}
+
+//3-Funcion seleccionarOpcion
+/**
+ * Muestras las opciones al usuario
+ * @return int
+ */
+function seleccionarOpcion() {
+    echo "Menu de opciones: \n";
+    echo "1) Jugar al wordix con una palabra elegida  \n";
+    echo "2) Jugar al wordix con una palabra aleatoria  \n";
+    echo "3) Mostrar una partida  \n";
+    echo "4) Mostrar la primera partida ganadora  \n";
+    echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra  \n";      
+    echo "7) Agregar una palabra de 5 letras a Wordix  \n";
+    echo "8) salir  \n";    
+    echo "Ingrese una opcion: ";
+    $opcionUsuario = solicitarNumeroEntre(1,8);
+    return $opcionUsuario;
+}
+
+//6-Funcion mostrarPartida 
+/**
+ * toma como parametro una partida para mostrar. Si se encuentra la muestra. Sino solicita otra partida
+ * @param int $numPartida
+ * @return string
+ */
+
+ // se le solicita un num al usuario
+
+function mostrarPartida($numPartida , $partidas) {
+    if ($numPartida >= 0 && $numPartida < count($partidas)) {
+        $datosPartida = $partidas[$numPartida];
+        $respuesta =          
+        "*********************\n";
+        "Partida Wordix $numPartida: " . "palabra " . $datosPartida["palabraWordix"] . "\n";
+        "Jugador: " . $datosPartida["jugador"] . "\n";
+        "Puntaje: " . $datosPartida["puntaje"] . "\n";
+        "Intentos: " . $datosPartida["intentos"] . "\n";
+        "*********************\n";
+    } else {
+        $respuesta = "Error: Número de partida inválido.\n";
+    }
+    return $respuesta;
+}
+
 
 /* ****COMPLETAR***** */
 
