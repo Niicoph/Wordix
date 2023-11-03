@@ -92,7 +92,31 @@ do {
                }
                break;
            case 2: 
-               echo "implementacion a hacer: 3";
+            $repetirPartida = true;
+            $numeroGuardado = [];
+            $coleccionPalabrasAleatorias = $coleccionPalabras; 
+
+            while($repetirPartida == true ) {
+                echo "Ingrese su nombre: \n";
+                $nombreJugador = (string)trim(fgets(STDIN));
+                $numeroPalabra = array_rand($coleccionPalabrasAleatorias, 1); /*Entrega un valor aleatorio del array (una palabra aleatoria), y se asigna a $numeroPalabra*/
+                                                                       
+                    $partida = jugarWordix($coleccionPalabrasAleatorias[$numeroPalabra] , $nombreJugador); // devuelve array partida y lo almacena en una variable
+                    array_push($coleccionPartidas, $partida);   
+                    array_push($numeroGuardado, $numeroPalabra);   
+                
+                echo "Desea jugar otra vez s/n? \n";
+               $respuestaJugador = (string)trim(fgets(STDIN));
+               if ($respuestaJugador == "s") {
+                  $repetirPartida = true;
+                  $coleccionPalabrasAleatorias = array_diff($coleccionPalabrasAleatorias, $numeroGuardado); /*Eliminamos los elementos del array $numeroGuardado en $coleccionPalabrasAleatorias, 
+                para que al usuario no le toquen las mismas palabras si desea volver a jugar el mismo modo */
+
+                }                                                         
+                else {                                                   
+                  $repetirPartida = false;
+               }
+            }
                break;   
            case 3: 
             echo "Número de partida que desea ver: ";
