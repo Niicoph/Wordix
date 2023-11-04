@@ -173,6 +173,95 @@ function agregarPalabra($coleccionPalabras, $nuevaPalabra)
     return $coleccionPalabras; // Retorna la colección actualizada
 }
 
+//8- Funcion primeraVictoria 
+/**
+ * funcion que retorna el indice de la primer partida ganada por un jugador. Si no se encuentra ninguna, devuelve -1
+ */
+function primeraVictoria($nombreJugador, $Partidas)
+{
+    $indice = 0;
+    $total = $Partidas;
+    $f = 0;
+    $n = 0;
+    // cuenta la cantidad de elementos del arreglo
+    foreach ($total as $indice) {
+        $f = $f + 1;
+    }
+    while ($n < $f && ($Partidas[$n]["jugador"] != $nombreJugador || $Partidas[$n]["puntaje"] == 0)) {
+        $n = $n + 1;
+    }
+    if ($n == $f) {
+        $n = -1;
+    }
+    return $n;
+}
+
+//9-Funcion devuelveResumen
+/**
+ * Funcion que devuelve el resumen de un jugador.
+ * @param array $partidas
+ * @param string $nombreJugador
+ */
+ function devuelveResumen($partidas, $nombreJugador)
+{
+    $resumen =
+        [
+            "jugador" => "",
+            "partidas" => 0,
+            "puntaje" => 0,
+            "victorias" => 0,
+            "intento1" => 0,
+            "intento2" => 0,
+            "intento3" => 0,
+            "intento4" => 0,
+            "intento5" => 0,
+            "intento6" => 0
+        ];
+    for ($i = 0; $i < count($partidas); $i++) {
+        if ($partidas[$i]["jugador"] == $nombreJugador) {
+            $resumen["jugador"]  = $nombreJugador;
+            $resumen["partidas"] = $resumen["partidas"] + 1;
+            $resumen["puntaje"]  = $resumen["puntaje"]  + $partidas[$i]["puntaje"];
+            if ($partidas[$i]["puntaje"] != 0) {
+                $resumen["victorias"] = $resumen["victorias"] + 1;
+            }
+            switch ($partidas[$i]["intentos"]) {
+                case 1:
+                    $resumen["intento1"] = $resumen["intento1"] + 1;
+                    break;
+                case 2:
+                    $resumen["intento2"] = $resumen["intento2"] + 1;
+                    break;
+                case 3:
+                    $resumen["intento3"] = $resumen["intento3"] + 1;
+                    break;
+                case 4:
+                    $resumen["intento4"] = $resumen["intento4"] + 1;
+                    break;
+                case 5:
+                    $resumen["intento5"] = $resumen["intento5"] + 1;
+                    break;
+                case 6:
+                    $resumen["intento6"] = $resumen["intento6"] + 1;
+                    break;
+            }
+        }
+    }
+    echo "\n*******************************";
+    echo "\nJugador: " . $resumen["jugador"];
+    echo "\nPartidas: " . $resumen["partidas"];
+    echo "\nPuntaje Total: " . $resumen["puntaje"];
+    echo "\nVictorias: " . $resumen["victorias"];
+    echo "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
+    echo "\nAdivinadas: \n";
+    echo "  Intento 1: " . $resumen["intento1"] . "\n";
+    echo "  Intento 2: " . $resumen["intento2"] . "\n";
+    echo "  Intento 3: " . $resumen["intento3"] . "\n";
+    echo "  Intento 4: " . $resumen["intento4"] . "\n";
+    echo "  Intento 5: " . $resumen["intento5"] . "\n";
+    echo "  Intento 6: " . $resumen["intento6"] . "\n";
+    echo "*******************************";
+}
 //10-Funcion solicitarJugador
 /**
  * Solicita al usuario el nombre del jugador, y lo retorna en minúsculas
