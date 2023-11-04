@@ -212,7 +212,7 @@ return $jugador;
 //11.1-Funcion compararPartidas 
 /**
  * Función complementaria a "11-Funcion partidasOrdenadas", para utilizar la función "uasort"
- * Hace una comparación entre los valores de dos índices de un array (en este caso, compara 'jugador' y 'palabraWordix'), devolviendo un valor diferente dependiendo cada caso
+ * Hace una comparación entre los valores de dos índices de un array (en este caso, compara los valores 'jugador', y si es necesario los valores 'palabraWordix'), devolviendo un valor diferente dependiendo cada caso
  * @param array $partida1
  * @param array $partida2
  * @return int
