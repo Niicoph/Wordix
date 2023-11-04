@@ -135,7 +135,8 @@ function solicitarNumeroEntre($min, $max)   // permite solicitar un numero entre
 
  // se le solicita un num al usuario
 
-function mostrarPartida($numPartida , $partidas) {
+function mostrarPartida($numPartida , $partidas) 
+{
     if ($numPartida >= 0 && $numPartida < count($partidas)) {
         $datosPartida = $partidas[$numPartida];
         $respuesta =          
@@ -172,7 +173,71 @@ function agregarPalabra($coleccionPalabras, $nuevaPalabra)
     return $coleccionPalabras; // Retorna la colección actualizada
 }
 
+//10-Funcion solicitarJugador
+/**
+ * Solicita al usuario el nombre del jugador, y lo retorna en minúsculas
+ * Garantiza que el nombre del jugador comience con una letra (se emplea la función ctype_alpha)
+ * @return string
+ *  */ 
+function solicitarJugador()
+{
+    $nombreCorrecto = true;
 
+    do {
+        echo "Ingrese el nombre del jugador:";
+        $jugador = trim(fgets(STDIN));
+        if (!ctype_alpha($jugador[0])){ //ctype_alpha retorna true si el primer carácter de $jugador es una letra, y false si no lo es
+            echo "El nombre ingresado no comienza con una letra. Por favor ingrese un nombre correcto. \n";
+        } else {
+            $nombreCorrecto = false;
+        }
+    } while ($nombreCorrecto);
+
+$jugador = strtolower($jugador); // Convertimos el string en minúsculas
+return $jugador;
+}
+
+//11-Funcion partidasOrdenadas
+/** Ordena las partidas que se encuentran dentro del array $coleccionPalabras y las muestra en pantalla
+ * Trabaja con la función "uasort", que utiliza como parametros: 
+ * 1) el array multidimensional donde quiere comparar cada índice uno por uno, con todo el resto (índice 0 con 1, 0 con 2, 0 con 3, etc.. luego 1 con 2, 1 con 3, 1 con 4, etc..)
+ * 2) la function/módulo compararPartidas, donde se encuentran los criterios de las comparaciones
+ * @param array $coleccionPartidas
+ */ 
+ function partidasOrdenadas ($coleccionPartidas){
+        uasort($coleccionPartidas, 'compararPartidas');
+        print_r($coleccionPartidas);    
+}
+ 
+//11.1-Funcion compararPartidas 
+/**
+ * Función complementaria a "11-Funcion partidasOrdenadas", para utilizar la función "uasort"
+ * Hace una comparación entre los valores de dos índices de un array (en este caso, compara 'jugador' y 'palabraWordix'), devolviendo un valor diferente dependiendo cada caso
+ * @param array $partida1
+ * @param array $partida2
+ * @return int
+ */
+function compararPartidas($partida1, $partida2) {
+      
+        if ($partida1['jugador'] > $partida2['jugador']) {     //Si el nombre del jugador en Partida1 es mayor alfabeticamente que el del jugador en Partida2, retorna un 1 
+            return 1;                                               //La función uasort recibe 1, y ordena al jugadorP2 antes que el jugadorP1, dentro del array
+
+        } elseif ($partida1['jugador'] < $partida2['jugador']) {  //Si el nombre del jugador en Partida1 es menor alfabeticamente que el del jugador en Partida2, retorna un -1
+            return -1;                                                //La función uasort recibe -1, y ordena al jugadorP1 antes que el jugadorP2, dentro del array
+
+        } 
+        else {  /*Si el nombre del jugador en Partida1 es igual alfabeticamente que el del jugador en Partida2, retorna un 0
+          Si retorna 0, quiere decir que es el mismo jugador en ambas partidas, por lo que hace la misma comparación, pero esta vez, ordenando las palabrasWordix*/                                                                                  
+            if ($partida1['palabraWordix'] > $partida2['palabraWordix']) {
+                return 1;
+            } elseif ($partida1['palabraWordix'] < $partida2['palabraWordix']) {
+                return -1;
+            } else {
+                return 0; // En caso de que ambos jugadores y palabras sean iguales.
+            }
+        }
+    }
+    
 /* ****COMPLETAR***** */
 
 /**************************************/
