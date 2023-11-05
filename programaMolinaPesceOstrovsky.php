@@ -298,6 +298,7 @@ function compararPartidas($partida1, $partida2) {
 $coleccionPalabras = cargarColeccionPalabras();
 $coleccionPartidas = cargarPartidas();
 $palabrasJugadas = [];
+$datosPartidas = [];
 //Proceso:
 // 12-
 do {
@@ -313,7 +314,8 @@ do {
                 echo "Numero de palabra ya jugado. \n";
             } else {
                 array_push($palabrasJugadas, $numeroPalabra);
-                jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
+                $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
+                array_push($datosPartidas,$partidaJugada);
             }
             break;
         case 2:
