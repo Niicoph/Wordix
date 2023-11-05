@@ -75,13 +75,7 @@ function mostrarPartida($numPartida , $partidas)
 {
     if ($numPartida >= 0 && $numPartida < count($partidas)) {
         $datosPartida = $partidas[$numPartida];
-        $respuesta =          
-        "*********************\n";
-        "Partida Wordix $numPartida: " . "palabra " . $datosPartida["palabraWordix"] . "\n";
-        "Jugador: " . $datosPartida["jugador"] . "\n";
-        "Puntaje: " . $datosPartida["puntaje"] . "\n";
-        "Intentos: " . $datosPartida["intentos"] . "\n";
-        "*********************\n";
+        $respuesta = "*********************\n". "Partida Wordix $numPartida: " . "palabra " . $datosPartida["palabraWordix"] . "\n" . "Jugador: " . $datosPartida["jugador"] . "\n" . "Puntaje: " . $datosPartida["puntaje"] . "\n" . "Intentos: " . $datosPartida["intentos"] . "\n" . "*********************\n";
     } else {
         $respuesta = "Error: Número de partida inválido.\n";
     }
@@ -300,7 +294,10 @@ do {
             echo "implementacion 1: ";
             break;
         case 3:
-            echo "implementacion 1: ";
+            echo "Ingrese el numero de partida que desea ver: ";
+            $numPartida = (int)trim(fgets(STDIN));
+            $respuesta = mostrarPartida($numPartida , $coleccionPartidas);
+            echo $respuesta;
             break;
         case 4:
             echo "implementacion 1: ";
@@ -320,4 +317,4 @@ do {
             $opcionSeleccionada = false;
             break;
     }
-} while ($opcionSeleccionada == true); 
+} while ($opcionSeleccionada == true);
