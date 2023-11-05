@@ -79,52 +79,9 @@ function seleccionarOpcion() {
     return $opcionUsuario;
 }
 
-//4-Función leerPalabra5Letras
-/**
- *  Se pide el ingreso de palabra de 5 letras, garantizando que el retorno sea una palabra con dicha condición
- * La función strtoupper convierte el string en mayúsculas (en su totalidad de carácteres)
- * Es utilizada la función esPalabra
- * @return string 
- */
-function leerPalabra5Letras()
-{
-    //string $palabra
-    echo "Ingrese una palabra de 5 letras: ";
-    $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra);
+// 4 y 5 en archivo wordix.php
 
-    while ((strlen($palabra) != 5) || !esPalabra($palabra)) {
-        echo "Debe ingresar una palabra de 5 letras:";
-        $palabra = strtoupper(trim(fgets(STDIN)));
-    }
-    return $palabra;
-}
 
-//5-Funcion solicitarNumeroEntre 
-/** 
- * Se encarga de garantizar que el valor ingresado por el usuario cumpla con las condiciones de: ser un número entero y estar dentro del rango especificado
- *@param int $min
- *@param int $max
- *@return int 
- */
-function solicitarNumeroEntre($min, $max)   // permite solicitar un numero entre dados por parametros. Si no cumplen las restricciones, vuelve a preguntar.
-{
-    //int $numero
-
-    $numero = trim(fgets(STDIN));
-
-    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
-        $numero  = $numero * 1; //con esta operación convierto el string en número.
-    }
-    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
-        $numero = trim(fgets(STDIN));
-        if (is_numeric($numero)) {
-            $numero  = $numero * 1;
-        }
-    }
-    return $numero;
-}
 
 //6-Funcion mostrarPartida 
 /**
@@ -337,118 +294,48 @@ function compararPartidas($partida1, $partida2) {
 
 
 //Inicialización de variables:
+
 $coleccionPalabras = cargarColeccionPalabras();
-$coleccionPartidas = []; 
-function solicitarOpcionMenu() {
-    echo "Menu de opciones: \n";
-    echo "1) Jugar al wordix con una palabra elegida  \n";
-    echo "2) Jugar al wordix con una palabra aleatoria  \n";
-    echo "3) Mostrar una partida  \n";
-    echo "4) Mostrar la primera partida ganadora  \n";
-    echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra  \n";      
-    echo "7) Agregar una palabra de 5 letras a Wordix  \n";
-    echo "8) salir  \n";                                                                         
-}
-
-
+$coleccionPartidas = cargarPartidas();
+$palabrasJugadas = [];
 //Proceso:
-
-do {    
-       $mostrarMenu = true;
-       while ($mostrarMenu == true)  { 
-       solicitarOpcionMenu();
-       echo "Ingrese Eleccion:  ";
-       $opcion = (int)trim(fgets(STDIN));
-       $opcionValida = true;
-       if ( $opcion >= 1 && $opcion <= 8) { 
-       switch ($opcion) {
-           case 1: 
-               $repetirPartida = true;
-               $numeroGuardado = [];
-               while($repetirPartida == true ) {
-                   echo "Ingrese su nombre: \n";
-                   $nombreJugador = (string)trim(fgets(STDIN));
-                   echo "Ingrese numero de palabra para jugar: \n";
-                   $numeroPalabra = (int)trim(fgets(STDIN));
-                  if (in_array($numeroPalabra, $numeroGuardado)) {   
-                   echo "No puede jugar esta palabra. Intente con otra \n";
-                  }else {
-                  $partida = jugarWordix($coleccionPalabras[$numeroPalabra] , $nombreJugador); // devuelve array partida y lo almacena en una variable
-                  array_push($coleccionPartidas,$partida);   
-                  array_push($numeroGuardado, $numeroPalabra);   
-                  } 
-                  echo "Desea jugar otra vez s/n? \n";
-                  $respuestaJugador = (string)trim(fgets(STDIN));
-                  if ($respuestaJugador == "s") {
-                     $repetirPartida = true;
-                  } else {
-                     $repetirPartida = false;
-                  }
-               }
-               break;
-           case 2: 
-            $repetirPartida = true;
-            $numeroGuardado = [];
-            $coleccionPalabrasAleatorias = $coleccionPalabras; 
-
-            while($repetirPartida == true ) {
-                echo "Ingrese su nombre: \n";
-                $nombreJugador = (string)trim(fgets(STDIN));
-                $numeroPalabra = array_rand($coleccionPalabrasAleatorias, 1); /*Entrega un valor aleatorio del array (una palabra aleatoria), y se asigna a $numeroPalabra*/
-                                                                       
-                    $partida = jugarWordix($coleccionPalabrasAleatorias[$numeroPalabra] , $nombreJugador); // devuelve array partida y lo almacena en una variable
-                    array_push($coleccionPartidas, $partida);   
-                    array_push($numeroGuardado, $numeroPalabra);   
-                
-                echo "Desea jugar otra vez s/n? \n";
-               $respuestaJugador = (string)trim(fgets(STDIN));
-               if ($respuestaJugador == "s") {
-                  $repetirPartida = true;
-                  $coleccionPalabrasAleatorias = array_diff($coleccionPalabrasAleatorias, $numeroGuardado); /*Eliminamos los elementos del array $numeroGuardado en $coleccionPalabrasAleatorias, 
-                para que al usuario no le toquen las mismas palabras si desea volver a jugar el mismo modo */
-
-                }                                                         
-                else {                                                   
-                  $repetirPartida = false;
-               }
-            }
-               break;   
-           case 3: 
-            echo "Número de partida que desea ver: ";
-            $numIngresado = (int)trim(fgets(STDIN));
-            if ($numIngresado >= 0 && $numIngresado < count($coleccionPartidas)) {
-                $datosPartida = $coleccionPartidas[$numIngresado];
-                echo "*********************\n";
-                echo "Partida Wordix $numIngresado: " . "palabra " . $datosPartida["palabraWordix"] . "\n";
-                echo "Jugador: " . $datosPartida["jugador"] . "\n";
-                echo "Puntaje: " . $datosPartida["puntaje"] . "\n";
-                echo "Intentos: " . $datosPartida["intentos"] . "\n";
-                echo "*********************\n";
+// 12-
+do {
+    $eleccionUsuario = seleccionarOpcion();
+    $opcionSeleccionada = true;
+    switch($eleccionUsuario) {
+        case 1:
+            echo "Ingrese nombre del jugador: ";
+            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            echo "Ingrese numero de palabra: ";
+            $numeroPalabra = (int)trim(fgets(STDIN));
+            if (in_array($numeroPalabra, $palabrasJugadas)) {
+                echo "Numero de palabra ya jugado. \n";
             } else {
-                echo "Error: Número de partida inválido.\n";
+                array_push($palabrasJugadas, $numeroPalabra);
+                jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
             }
-        
-               break;   
-           case 4: 
-               echo "implementacion a hacer: 4";
-               break;
-           case 5:
-               echo "implementacion a hacer: 5";
-               break;
-           case 6:
-               echo "implementacion a hacer: 6";
-               break;
-           case 7: 
-                $nuevaPalabra = leerPalabra5Letras();
-                $coleccionPalabras = agregarPalabra($coleccionPalabras, $nuevaPalabra);
-               break;
-           case 8:
-               $mostrarMenu = false;
-               break; 
-       } 
-    }else {
-    echo " ** Ingrese una opcion valida ** \n";
-      $opcionValida = false;
+            break;
+        case 2:
+            echo "implementacion 1: ";
+            break;
+        case 3:
+            echo "implementacion 1: ";
+            break;
+        case 4:
+            echo "implementacion 1: ";
+            break;
+        case 5:
+            echo "implementacion 1: ";
+            break;
+        case 6:
+            echo "implementacion 1: ";
+            break;
+        case 7:
+            echo "implementacion 1: ";
+            break;
+        case 8:
+            $opcionSeleccionada = false;
+            break;
     }
-  }
-} while ($opcionValida == false);
+} while ($opcionSeleccionada == true); 
