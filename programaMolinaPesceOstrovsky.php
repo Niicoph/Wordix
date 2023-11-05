@@ -1,23 +1,11 @@
 <?php
 include_once("wordix.php");
 
-
-
-/**************************************/
-/***** DATOS DE LOS INTEGRANTES *******/
-/**************************************/
-
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ****COMPLETAR***** */
 // Pesce Matias Nicolas. FAI-4594. TUDW. matias.pesce@est.fi.uncoma.edu.ar. Niicoph.
-
-
-/**************************************/
-/***** DEFINICION DE FUNCIONES ********/
-/**************************************/
+//
+//
 
 // 1-Funcion cargarColeccionPalabras
-
 /**
  * Obtiene una colección de palabras
  * @return array
@@ -33,9 +21,7 @@ function cargarColeccionPalabras()
 
     return ($coleccionPalabras);
 }
-
 //2-Funcion cargarPartidas 
-
 /**
  * Obtiene una coleccion de partidas
  * @return array
@@ -59,7 +45,6 @@ function cargarPartidas() {
     // retornamos las partidas
     return $partidas;
 }
-
 //3-Funcion seleccionarOpcion
 /**
  * Muestras las opciones al usuario
@@ -78,20 +63,14 @@ function seleccionarOpcion() {
     $opcionUsuario = solicitarNumeroEntre(1,8);
     return $opcionUsuario;
 }
-
 // 4 y 5 en archivo wordix.php
-
-
-
 //6-Funcion mostrarPartida 
 /**
- * toma como parametro una partida para mostrar. Si se encuentra la muestra. Sino solicita otra partida
+ * Toma como parametro un numero de partida y una coleccion de partidas. Si se encuentra la partida devuelve los datos. Sino devuelve error.
  * @param int $numPartida
+ * @param array $partidas
  * @return string
  */
-
- // se le solicita un num al usuario
-
 function mostrarPartida($numPartida , $partidas) 
 {
     if ($numPartida >= 0 && $numPartida < count($partidas)) {
@@ -108,10 +87,9 @@ function mostrarPartida($numPartida , $partidas)
     }
     return $respuesta;
 }
-
 //7-Funcion agregarPalabra
 /**
- * Recibe como parámetros la colección de palabras y la nueva palabra. La nueva palabra se agrega, solo si esta ya no pertenece a la colección.
+ * Recibe como parámetros la colección de palabras y la nueva palabra. La nueva palabra se agrega solo si esta ya no pertenece a la colección.
  * Caso contrario, se escribe un mensaje con el aviso.
  * @param array $coleccionPalabras
  * @param string $nuevaPalabra
@@ -123,10 +101,9 @@ function agregarPalabra($coleccionPalabras, $nuevaPalabra)
         echo "La palabra ya existe en la colección. Intente con otra.\n";
     } else {
         // Agrega la nueva palabra al final de la colección
-        $coleccionPalabras[] = $nuevaPalabra;
+        array_push($coleccionPalabras, $nuevaPalabra);
         echo "¡Éxito! La palabra $nuevaPalabra ha sido agregada.\n";
     }
-
     return $coleccionPalabras; // Retorna la colección actualizada
 }
 
@@ -304,11 +281,12 @@ $datosPartidas = [];
 do {
     $eleccionUsuario = seleccionarOpcion();
     $opcionSeleccionada = true;
+    $cantidadPalabras = count($coleccionPalabras) -1 ;
     switch($eleccionUsuario) {
         case 1:
             echo "Ingrese nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
-            echo "Ingrese numero de palabra: ";
+            echo "Ingrese numero de palabra entre 0 y " . $cantidadPalabras . " :" ;
             $numeroPalabra = (int)trim(fgets(STDIN));
             if (in_array($numeroPalabra, $palabrasJugadas)) {
                 echo "Numero de palabra ya jugado. \n";
@@ -334,7 +312,9 @@ do {
             echo "implementacion 1: ";
             break;
         case 7:
-            echo "implementacion 1: ";
+            $palabraNueva = leerPalabra5Letras();
+            $nuevaColeccion = agregarPalabra($coleccionPalabras , $palabraNueva);
+            $coleccionPalabras = $nuevaColeccion;
             break;
         case 8:
             $opcionSeleccionada = false;
