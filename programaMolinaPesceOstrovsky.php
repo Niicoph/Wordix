@@ -176,25 +176,18 @@ function primeraVictoria($nombreJugador, $Partidas)
             }
         }
     }
-    echo "\n*******************************";
-    echo "\nJugador: " . $resumen["jugador"];
-    echo "\nPartidas: " . $resumen["partidas"];
-    echo "\nPuntaje Total: " . $resumen["puntaje"];
-    echo "\nVictorias: " . $resumen["victorias"];
+    $respuesta = "\n*******************************" . "\nJugador: " . $resumen["jugador"] . "\nPartidas: " . $resumen["partidas"] . "\nPuntaje Total: " . $resumen["puntaje"] . "\nVictorias: " . $resumen["victorias"];
     if ($resumen["partidas"] > 0) {
-        echo "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
+        $respuesta2 = "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
     } else {
-        echo "\nPorcentaje de victorias: 0%"; // Aca le agregue un if porque cuando la partida es igual a 0, el programa intenta hacer una divicion por 0 y me tira error (axel)
-    }    
-    echo "\nAdivinadas: \n";
-    echo "  Intento 1: " . $resumen["intento1"] . "\n";
-    echo "  Intento 2: " . $resumen["intento2"] . "\n";
-    echo "  Intento 3: " . $resumen["intento3"] . "\n";
-    echo "  Intento 4: " . $resumen["intento4"] . "\n";
-    echo "  Intento 5: " . $resumen["intento5"] . "\n";
-    echo "  Intento 6: " . $resumen["intento6"] . "\n";
-    echo "*******************************\n";
-
+        $respuesta2 = "\nPorcentaje de victorias: 0%"; // Aca le agregue un if porque cuando la partida es igual a 0, el programa intenta hacer una divicion por 0 y me tira error (axel)
+    }   
+    $respuesta3 =  "\nAdivinadas: \n" . "  Intento 1: " . $resumen["intento1"] . "\n" . "  Intento 2: " . $resumen["intento2"] . "\n" . "  Intento 3: " . $resumen["intento3"] . "\n" . "  Intento 4: " . $resumen["intento4"] . "\n" . "  Intento 5: " . $resumen["intento5"] . "\n" . "  Intento 6: " . $resumen["intento6"] . "\n" . "*******************************\n";
+    $respuestaFinal = [];
+    array_push($respuestaFinal , $respuesta);
+    array_push($respuestaFinal , $respuesta2);
+    array_push($respuestaFinal , $respuesta3);
+    return $respuestaFinal;
     
 }
 //10-Funcion solicitarJugador
@@ -322,7 +315,9 @@ do {
             echo "Ingresar un nombre de jugador para ver sus estadisticas: ";
             $nombreJugadorStats = trim(fgets(STDIN));
             $stats = devuelveResumen($coleccionPartidas, strtoupper($nombreJugadorStats));
-            echo $stats; 
+            echo $stats[0];
+            echo $stats[1];
+            echo $stats[2];
             break;
         case 6:
             echo "implementacion 1: ";
