@@ -269,7 +269,6 @@ function compararPartidas($partida1, $partida2) {
 $coleccionPalabras = cargarColeccionPalabras();
 $coleccionPartidas = cargarPartidas();
 $palabrasJugadas = [];
-$datosPartidas = [];
 //Proceso:
 // 12-
 do {
@@ -287,7 +286,7 @@ do {
             } else {
                 array_push($palabrasJugadas, $numeroPalabra);
                 $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
-                array_push($datosPartidas,$partidaJugada);
+                array_push($coleccionPartidas,$partidaJugada);
             }
             break;
         case 2:
@@ -297,10 +296,14 @@ do {
             echo "Ingrese el numero de partida que desea ver: ";
             $numPartida = (int)trim(fgets(STDIN));
             $respuesta = mostrarPartida($numPartida , $coleccionPartidas);
-            echo $respuesta;
+            echo $respuesta; 
             break;
         case 4:
-            echo "implementacion 1: ";
+            echo "Ingrese un nombre de jugador para ver su primera victoria: ";
+            $nombreJugadorVictoria = trim(fgets(STDIN));
+            $numPrimeraVictoria = primeraVictoria($nombreJugadorVictoria, $coleccionPartidas);
+            $respuesta = mostrarPartida($numPrimeraVictoria, $coleccionPartidas);
+            echo $respuesta; 
             break;
         case 5:
             echo "implementacion 1: ";
