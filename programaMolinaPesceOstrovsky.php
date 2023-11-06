@@ -56,6 +56,7 @@ function seleccionarOpcion() {
     echo "2) Jugar al wordix con una palabra aleatoria  \n";
     echo "3) Mostrar una partida  \n";
     echo "4) Mostrar la primera partida ganadora  \n";
+    echo "5) Mostrar resumen de Jugador  \n";
     echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra  \n";      
     echo "7) Agregar una palabra de 5 letras a Wordix  \n";
     echo "8) salir  \n";    
@@ -180,7 +181,11 @@ function primeraVictoria($nombreJugador, $Partidas)
     echo "\nPartidas: " . $resumen["partidas"];
     echo "\nPuntaje Total: " . $resumen["puntaje"];
     echo "\nVictorias: " . $resumen["victorias"];
-    echo "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
+    if ($resumen["partidas"] > 0) {
+        echo "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
+    } else {
+        echo "\nPorcentaje de victorias: 0%"; // Aca le agregue un if porque cuando la partida es igual a 0, el programa intenta hacer una divicion por 0 y me tira error (axel)
+    }    
     echo "\nAdivinadas: \n";
     echo "  Intento 1: " . $resumen["intento1"] . "\n";
     echo "  Intento 2: " . $resumen["intento2"] . "\n";
@@ -188,7 +193,9 @@ function primeraVictoria($nombreJugador, $Partidas)
     echo "  Intento 4: " . $resumen["intento4"] . "\n";
     echo "  Intento 5: " . $resumen["intento5"] . "\n";
     echo "  Intento 6: " . $resumen["intento6"] . "\n";
-    echo "*******************************";
+    echo "*******************************\n";
+
+    
 }
 //10-Funcion solicitarJugador
 /**
@@ -312,7 +319,10 @@ do {
             }
             break;
         case 5:
-            echo "implementacion 1: ";
+            echo "Ingresar un nombre de jugador para ver sus estadisticas: ";
+            $nombreJugadorStats = trim(fgets(STDIN));
+            $stats = devuelveResumen($coleccionPartidas, strtoupper($nombreJugadorStats));
+            echo $stats; 
             break;
         case 6:
             echo "implementacion 1: ";
