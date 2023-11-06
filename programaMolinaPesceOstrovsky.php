@@ -104,7 +104,10 @@ function agregarPalabra($coleccionPalabras, $nuevaPalabra)
 
 //8- Funcion primeraVictoria 
 /**
- * funcion que retorna el indice de la primer partida ganada por un jugador. Si no se encuentra ninguna, devuelve -1
+ * Funcion que retorna el indice de la primer partida ganada por un jugador. Si no se encuentra ninguna, devuelve -1.
+ * @param string $nombreJugador
+ * @param array $partidas
+ * @return int
  */
 function primeraVictoria($nombreJugador, $Partidas)
 {
@@ -130,6 +133,7 @@ function primeraVictoria($nombreJugador, $Partidas)
  * Funcion que devuelve el resumen de un jugador.
  * @param array $partidas
  * @param string $nombreJugador
+ * @return array
  */
  function devuelveResumen($partidas, $nombreJugador)
 {
