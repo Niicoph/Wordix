@@ -3,7 +3,7 @@ include_once("wordix.php");
 
 // Pesce Matias Nicolas. FAI-4594. TUDW. matias.pesce@est.fi.uncoma.edu.ar. Niicoph.
 // Axel Ian Ostrovsky. FAI-4744. TUDW. axel.ostrovsky@est.fi.uncoma.edu.ar. axelost2005.
-//
+// Joaquín Molina Gabriel. FAI-4572. TUDW. joaquin.molina@est.fi.uncoma.edu.ar. JoaMolina7.
 
 // 1-Funcion cargarColeccionPalabras
 /**
