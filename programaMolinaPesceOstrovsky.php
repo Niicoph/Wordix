@@ -2,7 +2,7 @@
 include_once("wordix.php");
 
 // Pesce Matias Nicolas. FAI-4594. TUDW. matias.pesce@est.fi.uncoma.edu.ar. Niicoph.
-//
+// Axel Ian Ostrovsky. FAI-4744. TUDW. axel.ostrovsky@est.fi.uncoma.edu.ar. axelost2005.
 //
 
 // 1-Funcion cargarColeccionPalabras
@@ -291,7 +291,19 @@ do {
             }
             break;
         case 2:
-            echo "implementacion 1: ";
+            echo "Ingrese nombre del jugador: ";
+            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+        
+            // Generar un número aleatorio entre 0 y $cantidadPalabras - 1, copie el mismo codigo del caso 1 pero realizando un randomizador con el numero de palabra.
+            $numeroPalabra = rand(0, $cantidadPalabras - 1);
+        
+            if (in_array($numeroPalabra, $palabrasJugadas)) {
+                echo "Número de palabra ya jugado. \n";
+            } else {
+                array_push($palabrasJugadas, $numeroPalabra);
+                $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
+                array_push($coleccionPartidas, $partidaJugada);
+            }
             break;
         case 3:
             echo "Ingrese el numero de partida que desea ver: ";
