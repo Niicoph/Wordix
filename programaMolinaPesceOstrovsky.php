@@ -221,7 +221,7 @@ return $jugador;
  * 2) la function/módulo compararPartidas, donde se encuentran los criterios de las comparaciones
  * @param array $coleccionPartidas
  */ 
- function partidasOrdenadas ($coleccionPartidas){
+function partidasOrdenadas ($coleccionPartidas){
         uasort($coleccionPartidas, 'compararPartidas');
         print_r($coleccionPartidas);    
 }
@@ -320,7 +320,7 @@ do {
             echo $stats[2];
             break;
         case 6:
-            echo "implementacion 1: ";
+            partidasOrdenadas($coleccionPartidas);
             break;
         case 7:
             $palabraNueva = leerPalabra5Letras();
