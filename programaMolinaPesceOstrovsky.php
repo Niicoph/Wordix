@@ -269,6 +269,7 @@ function compararPartidas($partida1, $partida2) {
 $coleccionPalabras = cargarColeccionPalabras();
 $coleccionPartidas = cargarPartidas();
 $palabrasJugadas = [];
+
 //Proceso:
 // 12-
 do {
@@ -301,9 +302,14 @@ do {
         case 4:
             echo "Ingrese un nombre de jugador para ver su primera victoria: ";
             $nombreJugadorVictoria = trim(fgets(STDIN));
-            $numPrimeraVictoria = primeraVictoria($nombreJugadorVictoria, $coleccionPartidas);
+            $numPrimeraVictoria = primeraVictoria(strtoupper($nombreJugadorVictoria), $coleccionPartidas);
             $respuesta = mostrarPartida($numPrimeraVictoria, $coleccionPartidas);
-            echo $respuesta; 
+            if ($numPrimeraVictoria >= 0){
+                echo $respuesta;
+            }
+            else{
+                echo "El jugador ". $nombreJugadorVictoria . " no gano ninguna partida \n";
+            }
             break;
         case 5:
             echo "implementacion 1: ";
