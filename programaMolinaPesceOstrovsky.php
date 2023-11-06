@@ -271,7 +271,13 @@ $coleccionPartidas = cargarPartidas();
 $palabrasJugadas = [];
 
 //Proceso:
-// 12-
+/*12- 
+Switch: La estructura de control switch es una estructura de control de condicion muy similar a una serie de sentencias if. 
+En PHP, la sentencia switch se ejecuta de forma secuencial. Comienza a ejecutar las sentencias cuando encuentra un caso cuya 
+expresión coincide con la expresión de switch. Continúa ejecutando las sentencias hasta el final del bloque switch o hasta que
+encuentre una sentencia "break". Si falta el "break," ejecutará las sentencias del siguiente caso. Es fundamental entender esto
+para evitar errores en el código.*/
+
 do {
     $eleccionUsuario = seleccionarOpcion();
     $opcionSeleccionada = true;
