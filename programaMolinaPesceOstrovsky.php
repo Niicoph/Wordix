@@ -285,13 +285,13 @@ para evitar errores en el código.*/
 do {
     $eleccionUsuario = seleccionarOpcion();
     $opcionSeleccionada = true;
-    $cantidadPalabras = count($coleccionPalabras) -1 ;
+    $cantidadPalabras = count($coleccionPalabras);
     switch($eleccionUsuario) {
         case 1:
             echo "Ingrese nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
-            echo "Ingrese numero de palabra entre 0 y " . $cantidadPalabras . " :" ;
-            $numeroPalabra = (int)trim(fgets(STDIN));
+            echo "Ingrese numero de palabra entre 0 y " . $cantidadPalabras-1 . " :" ;
+            $numeroPalabra = solicitarNumeroEntre(0, $cantidadPalabras-1);
             if (in_array($numeroPalabra, $palabrasJugadas)) {
                 echo "Numero de palabra ya jugado. \n";
             } else {
