@@ -92,13 +92,15 @@ function mostrarPartida($numPartida , $partidas)
  *  */ 
 function agregarPalabra($coleccionPalabras, $nuevaPalabra)
 {
-    if (in_array($nuevaPalabra, $coleccionPalabras)) {
-        echo "La palabra ya existe en la colección. Intente con otra.\n";
-    } else {
+    foreach ($coleccionPalabras as $palabra) {
+        if ($palabra == $nuevaPalabra) {
+            echo "La palabra ya existe en la colección. Intente con otra.\n";
+            return $coleccionPalabras; // Retorna la colección original si la palabra ya existe
+        }
+    } 
         // Agrega la nueva palabra al final de la colección
         array_push($coleccionPalabras, $nuevaPalabra);
         echo "¡Éxito! La palabra $nuevaPalabra ha sido agregada.\n";
-    }
     return $coleccionPalabras; // Retorna la colección actualizada
 }
 
@@ -292,14 +294,21 @@ do {
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
             echo "Ingrese numero de palabra entre 0 y " . $cantidadPalabras-1 . " :" ;
             $numeroPalabra = solicitarNumeroEntre(0, $cantidadPalabras-1);
-            if (in_array($numeroPalabra, $palabrasJugadas)) {
-                echo "Numero de palabra ya jugado. \n";
-            } else {
-                array_push($palabrasJugadas, $numeroPalabra);
-                $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
-                array_push($coleccionPartidas,$partidaJugada);
-            }
-            break;
+            $numeroRepetido = false;
+                foreach ($palabrasJugadas as $palabraJugada) {
+                    if ($palabraJugada === $numeroPalabra) {
+                        echo "Número de palabra ya jugado.\n";
+                        $numeroRepetido = true;
+                        break;
+                    }
+                }
+
+                if (!$numeroRepetido) {
+                    array_push($palabrasJugadas, $numeroPalabra);
+                    $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
+                    array_push($coleccionPartidas, $partidaJugada);
+                }
+                break;
         case 2:
             echo "Ingrese nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
@@ -307,13 +316,20 @@ do {
             // Generar un número aleatorio entre 0 y $cantidadPalabras - 1, copie el mismo codigo del caso 1 pero realizando un randomizador con el numero de palabra.
             $numeroPalabra = rand(0, $cantidadPalabras - 1);
         
-            if (in_array($numeroPalabra, $palabrasJugadas)) {
-                echo "Número de palabra ya jugado. \n";
-            } else {
-                array_push($palabrasJugadas, $numeroPalabra);
-                $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
-                array_push($coleccionPartidas, $partidaJugada);
-            }
+            $numeroRepetido = false;
+                foreach ($palabrasJugadas as $palabraJugada) {
+                    if ($palabraJugada === $numeroPalabra) {
+                        echo "Número de palabra ya jugado.\n";
+                        $numeroRepetido = true; //Genera que no se entre al if siguiente, por lo que no se jugaría la partida con el mismo número de palabra
+                        break;
+                    }
+                }
+
+                    if (!$numeroRepetido) { //Si el número de palabra no fue jugado, $numeroRepetido se mantiene false, y la condición del if es verdadera
+                        array_push($palabrasJugadas, $numeroPalabra);
+                        $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
+                        array_push($coleccionPartidas, $partidaJugada);
+                    }
             break;
         case 3:
             echo "Ingrese el numero de partida que desea ver: ";
