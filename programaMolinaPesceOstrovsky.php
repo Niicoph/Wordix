@@ -107,9 +107,9 @@ function agregarPalabra($coleccionPalabras, $nuevaPalabra) {
  */
 function primeraVictoria($nombreJugador, $partidas) {
     $cantidad = count($partidas);
-    $contador = 0;
-                              
-    while ( $contador < $cantidad && ($partidas[$contador]["jugador"] != $nombreJugador || $partidas[ $contador]["puntaje"] == 0)) {
+    $contador = 0;                                               
+                       
+    while ( $contador < $cantidad && ($partidas[$contador]["jugador"] != $nombreJugador || $partidas[$contador]["puntaje"] == 0)) {
          $contador =  $contador + 1;
     }
     if ( $contador == $cantidad) {
@@ -138,9 +138,9 @@ function primeraVictoria($nombreJugador, $partidas) {
             "intento5" => 0,
             "intento6" => 0
         ];
-    for ($i = 0; $i < count($partidas); $i++) {
-        if ($partidas[$i]["jugador"] == $nombreJugador) {
-            $resumen["jugador"]  = $nombreJugador;
+    for ($i = 0; $i < count($partidas); $i++) {                     
+        if ($partidas[$i]["jugador"] == $nombreJugador) {             
+            $resumen["jugador"]  = $nombreJugador;                   
             $resumen["partidas"] = $resumen["partidas"] + 1;
             $resumen["puntaje"]  = $resumen["puntaje"]  + $partidas[$i]["puntaje"];
             if ($partidas[$i]["puntaje"] != 0) {
@@ -168,7 +168,7 @@ function primeraVictoria($nombreJugador, $partidas) {
             }
         }
     }
-    $respuesta = "\n*******************************" . "\nJugador: " . $resumen["jugador"] . "\nPartidas: " . $resumen["partidas"] . "\nPuntaje Total: " . $resumen["puntaje"] . "\nVictorias: " . $resumen["victorias"];
+    $respuesta = "\n*******************************" . "\nJugador: " . $nombreJugador . "\nPartidas: " . $resumen["partidas"] . "\nPuntaje Total: " . $resumen["puntaje"] . "\nVictorias: " . $resumen["victorias"];
     if ($resumen["partidas"] > 0) {
         $respuesta2 = "\nPorcentaje de victorias: " . $resumen["victorias"] * 100 / $resumen["partidas"] . "%";
     } else {
