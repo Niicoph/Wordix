@@ -190,19 +190,17 @@ function primeraVictoria($nombreJugador, $partidas) {
  *  */ 
 function solicitarJugador() {
     $nombreCorrecto = true;
-
-    do {
-        echo "Ingrese el nombre del jugador:";
+    while($nombreCorrecto) {
+        echo "ingrese el nombre del jugador: ";
         $jugador = trim(fgets(STDIN));
         if (!ctype_alpha($jugador[0])){
-            echo "El nombre ingresado no comienza con una letra. Por favor ingrese un nombre correcto. \n";
+            echo "El nombre ingresado no comienza con una letra. Por favor ingrese un nombre correcto \n";
         } else {
             $nombreCorrecto = false;
         }
-    } while ($nombreCorrecto);
-
-$jugador = strtolower($jugador); 
-return $jugador;
+    }
+    $jugador = strtolower($jugador); 
+    return $jugador;
 }
 
 //11-Funcion partidasOrdenadas
@@ -267,8 +265,7 @@ do {
     $cantidadPalabras = count($coleccionPalabras);
     switch($eleccionUsuario) {
         case 1:
-            echo "Ingrese nombre del jugador: ";
-            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            $nombreJugador = solicitarJugador();
             echo "Ingrese numero de palabra entre 0 y " . $cantidadPalabras-1 . " :" ;
             $numeroPalabra = solicitarNumeroEntre(0, $cantidadPalabras-1);
             $numeroRepetido = false;
@@ -286,8 +283,7 @@ do {
                 }
                 break;
         case 2:
-            echo "Ingrese nombre del jugador: ";
-            $nombreJugador = strtoupper(trim(fgets(STDIN)));
+            $nombreJugador = strtoupper(solicitarJugador());
             $numeroPalabra = rand(0, $cantidadPalabras - 1);
             $numeroRepetido = false;
                 foreach ($palabrasJugadas as $palabraJugada) {
@@ -311,9 +307,8 @@ do {
             echo $respuesta; 
             break;
         case 4:
-            echo "Ingrese un nombre de jugador para ver su primera victoria: ";
-            $nombreJugadorVictoria = trim(fgets(STDIN));
-            $numPrimeraVictoria = primeraVictoria(strtoupper($nombreJugadorVictoria), $coleccionPartidas);
+            $nombreJugadorVictoria = strtoupper(solicitarJugador());
+            $numPrimeraVictoria = primeraVictoria($nombreJugadorVictoria, $coleccionPartidas);
             $respuesta = mostrarPartida($numPrimeraVictoria, $coleccionPartidas);
             if ($numPrimeraVictoria >= 0){
                 echo $respuesta;
@@ -323,9 +318,8 @@ do {
             }
             break;
         case 5:
-            echo "Ingresar un nombre de jugador para ver sus estadisticas: ";
-            $nombreJugadorStats = trim(fgets(STDIN));
-            $stats = devuelveResumen($coleccionPartidas, strtoupper($nombreJugadorStats));
+            $nombreJugadorStats = strtoupper(solicitarJugador());
+            $stats = devuelveResumen($coleccionPartidas,$nombreJugadorStats);
             echo $stats[0];
             echo $stats[1];
             echo $stats[2];
