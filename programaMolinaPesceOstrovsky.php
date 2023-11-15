@@ -12,7 +12,7 @@ include_once("wordix.php");
  */
 function cargarColeccionPalabras() {
     $coleccionPalabras = [
-        "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
+        "MUJER", "QUESO","FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
         "CRUDO", "RANGO", "FARDO", "BRAZO", "MUNDO"
@@ -272,8 +272,7 @@ do {
                 foreach ($palabrasJugadas as $palabraJugada) {
                     if ($palabraJugada === $numeroPalabra) {
                         echo "Número de palabra ya jugado.\n";
-                        $numeroRepetido = true;
-                        break;
+                        $numeroRepetido = true; 
                     }
                 }
                 if (!$numeroRepetido) {
@@ -281,23 +280,28 @@ do {
                     $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
                     $coleccionPartidas[] = $partidaJugada;
                 }
-                break;
+                
+            break; 
         case 2:
             $nombreJugador = strtoupper(solicitarJugador());
+            do{
+                
             $numeroPalabra = rand(0, $cantidadPalabras - 1);
             $numeroRepetido = false;
+
                 foreach ($palabrasJugadas as $palabraJugada) {
                     if ($palabraJugada == $numeroPalabra) {
-                        echo "Número de palabra ya jugado.\n";
+                        echo "Número de palabra ya jugado. Generando otro...\n";
                         $numeroRepetido = true; 
-                        break;
                     }
                 }
+
                 if (!$numeroRepetido) {
                     $palabrasJugadas[] = $numeroPalabra;
                     $partidaJugada = jugarWordix($coleccionPalabras[$numeroPalabra], $nombreJugador);
                     $coleccionPartidas[] = $partidaJugada;
                 }
+            } while ($numeroRepetido); 
             break;
         case 3:
             $partidasDisponibles = count($coleccionPartidas) - 1 ;
