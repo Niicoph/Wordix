@@ -302,13 +302,31 @@ do {
                  $contador = 0;
               }
             } while($jugoPalabra == true);
-
-           //  echo "comenzaria la partida, se guardarian los datos de la misma y se hace un push al array coleccionPartidas";
-
+            $nuevaPartida = jugarWordix( $coleccionPalabras[$numPartida],$nombreJugador);
+            array_push($coleccionPartidas , $nuevaPartida);
             break; 
         case 2:
-          // implementar case 2 utilizando un recorrido parcial.
-            break;
+            $nombreJugador = solicitarJugador();
+            $numCantidadPalabras = count($coleccionPalabras); 
+            $numPartida = rand(0, $numCantidadPalabras);
+            $contador = 0;  
+            $jugoPalabra = false; 
+            do {   
+              while($contador < count($coleccionPartidas) && ($coleccionPartidas[$contador]["jugador"] != $nombreJugador || $coleccionPalabras[$numPartida] != $coleccionPartidas[$contador]["palabraWordix"])) {
+              $contador++;
+              $jugoPalabra = false;
+              }
+              if ($contador < count($coleccionPartidas)) {
+                 $jugoPalabra = true;
+                 echo "La palabra ya fue jugada por el jugador" . " $nombreJugador \n";
+                 echo "ingrese otro numero para jugar: ";
+                 $numPartida = solicitarNumeroEntre(1,$numCantidadPalabras) - 1;
+                 $contador = 0;
+              }
+            } while($jugoPalabra == true);
+            $nuevaPartida = jugarWordix( $coleccionPalabras[$numPartida],$nombreJugador);
+            array_push($coleccionPartidas , $nuevaPartida);
+            break; 
         case 3:
             $partidasDisponibles = count($coleccionPartidas)  ;
             echo "Ingrese el numero de partida que desea ver (entre 1 y $partidasDisponibles): ";
