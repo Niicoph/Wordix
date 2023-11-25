@@ -318,9 +318,7 @@ do {
               }
               if ($contador < count($coleccionPartidas)) {
                  $jugoPalabra = true;
-                 echo "La palabra ya fue jugada por el jugador" . " $nombreJugador \n";
-                 echo "ingrese otro numero para jugar: ";
-                 $numPartida = solicitarNumeroEntre(1,$numCantidadPalabras) - 1;
+                 $numPartida = rand(0, $numCantidadPalabras);
                  $contador = 0;
               }
             } while($jugoPalabra == true);
